@@ -1,19 +1,19 @@
 {
-  "name": "ligmawebcrawlerhttp",
-  "version": "1.0.0",
-  "description": "ligmacrawler is web crawler for crawling",
-  "main": "main.js",
-  "scripts": {
-    "start": "node main.js",
-    "test": "jest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "jest": "^29.7.0"
-  },
-  "dependencies": {
-    "jsdom": "^24.1.0"
-  }
+    "name": "ligmawebcrawlerhttp",
+    "version": "1.0.0",
+    "description": "ligmacrawler is web crawler for crawling",
+    "main": "main.js",
+    "scripts": {
+        "start": "node --no-warnings main.js",
+        "test": "jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "jest": "^29.7.0"
+    },
+    "dependencies": {
+        "jsdom": "^24.1.0"
+    }
 }
