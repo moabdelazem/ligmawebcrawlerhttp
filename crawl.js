@@ -1,4 +1,3 @@
-const { Http2ServerRequest } = require("http2");
 const { JSDOM } = require("jsdom");
 
 async function crawlPage(baseUrl, currentUrl, pages) {
