@@ -1,6 +1,21 @@
+const { Http2ServerRequest } = require("http2");
 const { JSDOM } = require("jsdom");
 
-async function crawlPage(currentUrl) {
+async function crawlPage(baseUrl, currentUrl, pages) {
+    const baseUrlObj = new URL(baseUrl);
+    const currentUrlObj = new URL(currentUrl);
+    if (baseUrlObj.hostname !== currentUrlObj.hostname) {
+        return pages;
+    }
+
+    const normalizedCurrentUrl = normalizeUrl(currentUrl);
+    if (pages[normalizedCurrentUrl] > 0) {
+        pages[normalizedCurrentUrl]++;
+        return pages;
+    }
+
+    pages[normalizedCurrentUrl] = 1;
+
     console.log(`actively crawling : ${currentUrl}`);
     try {
         const response = await fetch(currentUrl);
@@ -8,19 +23,28 @@ async function crawlPage(currentUrl) {
             console.log(
                 `error in fetching data ${response.status} on page ${currentUrl}`
             );
-            return;
+            return pages;
         }
         const contentType = response.headers.get("content-type");
         if (!contentType.includes("text/html")) {
             console.log(
                 `error non html respone, content type : ${contentType} on page ${currentUrl}`
             );
-            return;
+            return pages;
         }
-        console.log(await response.text());
+
+        const htmlBody = await response.text();
+        const nextUrls = getUrlsFromHTML(htmlBody, baseUrl);
+
+        await Promise.all(
+            nextUrls.map(async (nextUrl) => {
+                pages = await crawlPage(baseUrl, nextUrl, pages);
+            })
+        );
     } catch (error) {
         console.log(`error in fetch : ${error}`);
     }
+    return pages;
 }
 
 function getUrlsFromHTML(htmlBody, baseUrl) {
