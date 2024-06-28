@@ -20,14 +20,14 @@ async function crawlPage(baseUrl, currentUrl, pages) {
         const response = await fetch(currentUrl);
         if (response.status > 399) {
             console.log(
-                `error in fetching data ${response.status} on page ${currentUrl}`
+                `error in fetching data ${response.status} on page ${currentUrl}`,
             );
             return pages;
         }
         const contentType = response.headers.get("content-type");
         if (!contentType.includes("text/html")) {
             console.log(
-                `error non html respone, content type : ${contentType} on page ${currentUrl}`
+                `error non html respone, content type : ${contentType} on page ${currentUrl}`,
             );
             return pages;
         }
@@ -38,7 +38,7 @@ async function crawlPage(baseUrl, currentUrl, pages) {
         await Promise.all(
             nextUrls.map(async (nextUrl) => {
                 pages = await crawlPage(baseUrl, nextUrl, pages);
-            })
+            }),
         );
     } catch (error) {
         console.log(`error in fetch : ${error}`);
@@ -58,7 +58,7 @@ function getUrlsFromHTML(htmlBody, baseUrl) {
                 urls.push(objUrl.href);
             } catch (error) {
                 console.log(
-                    `there is something wrong with the provided url : ${error}`
+                    `there is something wrong with the provided url : ${error}`,
                 );
             }
         } else {
@@ -67,7 +67,7 @@ function getUrlsFromHTML(htmlBody, baseUrl) {
                 urls.push(objUrl.href);
             } catch (error) {
                 console.log(
-                    `there is something wrong with the provided url : ${error}`
+                    `there is something wrong with the provided url : ${error}`,
                 );
             }
         }

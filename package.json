@@ -1,14 +1,14 @@
 {
-    "name": "ligmawebcrawlerhttp",
+    "name": "webcrawlerhttp",
     "version": "1.0.0",
-    "description": "ligmacrawler is web crawler for crawling",
+    "description": "crawler is web crawler for crawling",
     "main": "main.js",
     "scripts": {
         "start": "node --no-warnings main.js",
         "test": "jest"
     },
     "keywords": [],
-    "author": "",
+    "author": "Mohamed Abdelazem",
     "license": "ISC",
     "devDependencies": {
         "jest": "^29.7.0"
