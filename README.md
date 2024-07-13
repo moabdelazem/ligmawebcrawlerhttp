@@ -1,2 +1,2 @@
-# ligmawebcrawlerhttp
-ligmacrawler is web crawler for crawling
+# webcrawlerhttp
+HTTP web crawler Using Javascript
